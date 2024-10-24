@@ -1,6 +1,7 @@
 import React from "react";
 import RyoturiaModel from "./RyoturiaModel";
 import { useInputStore } from "@/store/input";
+import { useFrame } from "@react-three/fiber";
 
 type Props = {};
 

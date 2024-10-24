@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { A11yAnnouncer } from "@react-three/a11y";
 import { OrbitControls, Preload, Stats } from "@react-three/drei";
+import { Euler } from "three";
 
 const Controls = () => {
   const control = useRef(null);
@@ -14,7 +15,13 @@ const CanvasWrapper = ({ children }) => {
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
         mode="concurrent"
-        camera={{ position: [-1.5, 1, 5.5], fov: 45, near: 1, far: 20 }}
+        camera={{
+          position: [-5.3, 14.8, 13],
+          rotation: new Euler(-0.78, -0.33, -0.32),
+          fov: 45,
+          near: 1,
+          far: 40,
+        }}
         shadows
         dpr={[1, 1.5]}
         style={{
