@@ -9,6 +9,7 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { animated, useSpring } from "@react-spring/three";
 import { useFrame } from "@react-three/fiber";
+import { lerp } from "three/src/math/MathUtils";
 
 type Props = JSX.IntrinsicElements["group"] & {
   c: boolean;
@@ -68,16 +69,29 @@ type GLTFResult = GLTF & {
   // animations: GLTFAction[];
 };
 
-// 3 / 360
-// x / Math.PI * 2
-// (3 * (Math.PI * 2)) / 360 = x
-
+const ANIMATION_TIME = 0.2; // seconds
+// Rotation in Blender is 3 euler which = 3 out of 360
+// ThreeJS uses PI-based units, so it'd be `x / Math.PI * 2`
+// The full proportional calculation: `(3 * (Math.PI * 2)) / 360 = x`
+const WHITE_KEY_ROTATION = 0.05235987755;
 const AnimatedWhiteKey = ({ pressed, ...props }) => {
-  console.log("pressed", pressed);
   const meshRef = useRef<THREE.Mesh>();
-  useFrame(() => {
+  const pressedDelta = useRef(0);
+  useFrame(({}, delta) => {
+    // If pressed, we store the delta time for animation
+    if (pressed) {
+      pressedDelta.current += delta;
+    } else {
+      pressedDelta.current = 0;
+    }
+
     if (meshRef.current)
-      meshRef.current.rotation.x = pressed ? 0.05235987755 : 0;
+      // We use a `lerp()` method to "tween" between 2 rotational values
+      meshRef.current.rotation.x = lerp(
+        0,
+        WHITE_KEY_ROTATION,
+        Math.min(pressedDelta.current / ANIMATION_TIME, 1)
+      );
   });
 
   return <mesh ref={meshRef} {...props} />;
