@@ -863,6 +863,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.20.6":
+  version "7.25.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.25.9.tgz#65884fd6dc255a775402cc1d9811082918f4bf00"
+  integrity sha512-4zpTHZ9Cm6L9L+uIqghQX8ZXg8HKFcjYO3qHoO8zTmRm6HQUJ8SSJ+KRvbMBZn0EGVlT4DRYeQ/6hjlyXBh+Kg==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.16.7.tgz#8d126c8701fde4d66b264b3eba3d96f07666d155"
@@ -1545,6 +1552,11 @@
   integrity sha512-OJdKDgTPVBUgc+s74DYoy4aLznbFFC38Xm4ElmU1YwGNgR7GGFVvFCX7lpVgOsT6S1zSJtGdajTsOYE8/xY9nA==
   dependencies:
     "@types/webxr" "*"
+
+"@types/webmidi@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@types/webmidi/-/webmidi-2.1.0.tgz#085ec7279a9c9c13453589db9ecebbcfa4bf771b"
+  integrity sha512-k898MjEUSHB+6rSeCPQk/kLgie0wgWZ2t78GlWj86HbTQ+XmtbBafYg5LNjn8bVHfItEhPGZPf579Xfc6keV6w==
 
 "@types/webxr@*":
   version "0.4.0"
@@ -2233,6 +2245,13 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+djipevents@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/djipevents/-/djipevents-2.0.7.tgz#4805dcb8dcf0b4a2c6e51eaecdfc218bb8f202fb"
+  integrity sha512-KNFYaU85imxOCKOUsIR70Iz9E19r96/X7LSH+u0tSoZdpWcBdzoqtTsU+wuLhc6GMpSFob+KInkZAbfKi01Bjg==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
 
 doctrine@^2.1.0:
   version "2.1.0"
@@ -3347,6 +3366,11 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
+jazz-midi@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/jazz-midi/-/jazz-midi-1.7.9.tgz#ad564e85acf12414aec7ef7d879ad61a5d7f6896"
+  integrity sha512-c8c4BBgwxdsIr1iVm53nadCrtH7BUlnX3V95ciK/gbvXN/ndE5+POskBalXgqlc/r9p2XUbdLTrgrC6fou5p9w==
+
 jest-worker@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-24.9.0.tgz#5dbfdb5b2d322e98567898238a9697bcce67b3e5"
@@ -3418,6 +3442,14 @@ jsonfile@^4.0.0:
   dependencies:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
+
+jzz@^1.8.5:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/jzz/-/jzz-1.8.6.tgz#4b2d412ee461eb658e764cf69787a373c6f2d564"
+  integrity sha512-O32b8/Z9oHxsIT/rNV8iEw+RThIBcMAK62fIvMZ3NacR3+T2w4BTJBFNqhOYlkOQhxQD3MZ7b3o69RKAx4xymg==
+  dependencies:
+    "@types/webmidi" "^2.1.0"
+    jazz-midi "^1.7.9"
 
 ktx-parse@^0.2.1:
   version "0.2.2"
@@ -4237,6 +4269,11 @@ regenerator-runtime@^0.13.4:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
 
+regenerator-runtime@^0.14.0:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz#356ade10263f685dda125100cd862c1db895327f"
+  integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
+
 regenerator-transform@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.15.0.tgz#cbd9ead5d77fae1a48d957cf889ad0586adb6537"
@@ -4983,10 +5020,10 @@ url-loader@^4.1.1:
     mime-types "^2.1.27"
     schema-utils "^3.0.0"
 
-use-sync-external-store@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.1.0.tgz#3343c3fe7f7e404db70f8c687adf5c1652d34e82"
-  integrity sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==
+use-sync-external-store@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.2.tgz#c3b6390f3a30eba13200d2302dcdf1e7b57b2ef9"
+  integrity sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==
 
 util-deprecate@~1.0.1:
   version "1.0.2"
@@ -5022,6 +5059,15 @@ webgl-sdf-generator@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/webgl-sdf-generator/-/webgl-sdf-generator-1.1.1.tgz#3e1b422b3d87cd3cc77f2602c9db63bc0f6accbd"
   integrity sha512-9Z0JcMTFxeE+b2x1LJTdnaT8rT8aEp7MVxkNwoycNmJWwPdzoXzMh0BjJSh/AEFP+KPYZUli814h8bJZFIZ2jA==
+
+webmidi@^3.1.11:
+  version "3.1.11"
+  resolved "https://registry.yarnpkg.com/webmidi/-/webmidi-3.1.11.tgz#295f1af6ddf9daf9c1911f0003c7e885ea4fe03b"
+  integrity sha512-qtXy0cJ7FbE2SBRyN/vcDFSJvCdcKiWreAdxCAtJSu1btWyzOwDfJyFuheylrwn5Uj4nIINVKCJOeqYSeG75Tg==
+  dependencies:
+    djipevents "^2.0.7"
+  optionalDependencies:
+    jzz "^1.8.5"
 
 webpack-bundle-analyzer@4.3.0:
   version "4.3.0"
@@ -5280,9 +5326,9 @@ zustand@^3.2.0, zustand@^3.5.13, zustand@^3.6.9, zustand@^3.7.1:
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.7.2.tgz#7b44c4f4a5bfd7a8296a3957b13e1c346f42514d"
   integrity sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==
 
-zustand@^4.0.0-rc.1:
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.0.0-rc.1.tgz#ec30a3afc03728adec7e1bd7bcc3592176372201"
-  integrity sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==
+zustand@^4.5.0:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.5.5.tgz#f8c713041543715ec81a2adda0610e1dc82d4ad1"
+  integrity sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==
   dependencies:
-    use-sync-external-store "1.1.0"
+    use-sync-external-store "1.2.2"

@@ -1,3 +1,4 @@
+import DebugInput from "@/features/input/DebugInput";
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -13,10 +14,20 @@ const Shader = dynamic(
     ssr: false,
   }
 );
+const PianoScene = dynamic(
+  () => import("@/components/canvas/PianoScene/PianoScene"),
+  {
+    ssr: false,
+  }
+);
 
 // DOM elements here
 const DOM = () => {
-  return <></>;
+  return (
+    <>
+      <DebugInput />
+    </>
+  );
 };
 
 // Canvas/R3F components here
@@ -30,7 +41,7 @@ const R3F = () => {
 
   return (
     <>
-      <Shader onClick={handleOnClick} />
+      <PianoScene />
     </>
   );
 };

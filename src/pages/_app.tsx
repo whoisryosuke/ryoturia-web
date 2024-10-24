@@ -7,6 +7,7 @@ import Header from "@/components/dom/Header";
 import Dom from "@/components/layout/dom";
 import dynamic from "next/dynamic";
 import "@/styles/index.css";
+import AppWrapper from "@/components/dom/AppWrapper";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false,
@@ -35,10 +36,10 @@ function App({ Component, pageProps = { title: "index" } }: AppProps) {
   const children = Component(pageProps).props.children;
 
   return (
-    <>
+    <AppWrapper>
       <Header title={pageProps.title} />
       <AppLayout>{children}</AppLayout>
-    </>
+    </AppWrapper>
   );
 }
 
