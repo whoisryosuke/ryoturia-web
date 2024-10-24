@@ -9,6 +9,11 @@ const KEY_MAP: Record<KeyboardEvent["key"], Note> = {
   g: "G1",
   h: "A1",
   j: "B1",
+  w: "C#1",
+  e: "D#1",
+  r: "F#1",
+  t: "G#1",
+  y: "A#1",
 };
 
 type Props = {};

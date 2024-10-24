@@ -113,7 +113,7 @@ export function RyoturiaModel({
   ...props
 }: Props) {
   const { nodes, materials } = useGLTF(
-    "/models/MIDI to Keyframe - Piano Template - Web V3.glb"
+    "/models/MIDI to Keyframe - Piano Template - Web V4.glb"
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
@@ -123,60 +123,71 @@ export function RyoturiaModel({
         position={[-0.488, 0.901, -5.421]}
         pressed={c}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes["BlackKeyC#"].geometry}
         material={materials["PianoKey.Black"]}
         position={[-0.096, 1.014, -5.417]}
+        pressed={csharp}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes["BlackKeyG#"].geometry}
         material={materials["PianoKey.Black"]}
         position={[4.304, 1.014, -5.417]}
+        pressed={gsharp}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyD.geometry}
         material={materials["PianoKey.White"]}
         position={[0.578, 0.901, -5.421]}
+        pressed={d}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyE.geometry}
         material={materials["PianoKey.White"]}
         position={[1.644, 0.901, -5.421]}
+        pressed={e}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyF.geometry}
         material={materials["PianoKey.White"]}
         position={[2.71, 0.901, -5.421]}
+        pressed={f}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyG.geometry}
         material={materials["PianoKey.White"]}
         position={[3.775, 0.901, -5.421]}
+        pressed={g}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyA.geometry}
         material={materials["PianoKey.White"]}
         position={[4.841, 0.901, -5.421]}
+        pressed={a}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes.WhiteKeyB.geometry}
         material={materials["PianoKey.White"]}
         position={[5.907, 0.901, -5.421]}
+        pressed={b}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes["BlackKeyD#"].geometry}
         material={materials["PianoKey.Black"]}
         position={[1.111, 1.014, -5.417]}
+        pressed={dsharp}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes["BlackKeyF#"].geometry}
         material={materials["PianoKey.Black"]}
         position={[3.217, 1.014, -5.417]}
+        pressed={fsharp}
       />
-      <mesh
+      <AnimatedWhiteKey
         geometry={nodes["BlackKeyA#"].geometry}
         material={materials["PianoKey.Black"]}
         position={[5.357, 1.014, -5.417]}
+        pressed={asharp}
       />
       <mesh
         geometry={nodes.ScreenBorder.geometry}
@@ -270,4 +281,4 @@ export function RyoturiaModel({
 
 export default RyoturiaModel;
 
-useGLTF.preload("/models/MIDI to Keyframe - Piano Template - Web V3.glb");
+useGLTF.preload("/models/MIDI to Keyframe - Piano Template - Web V4.glb");
