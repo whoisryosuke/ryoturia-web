@@ -10,6 +10,7 @@ import { GLTF } from "three-stdlib";
 import { animated, useSpring } from "@react-spring/three";
 import { useFrame } from "@react-three/fiber";
 import { lerp } from "three/src/math/MathUtils";
+import { easing } from "maath";
 
 type Props = JSX.IntrinsicElements["group"] & {
   c: boolean;
@@ -76,21 +77,15 @@ const ANIMATION_TIME = 0.2; // seconds
 const WHITE_KEY_ROTATION = 0.05235987755;
 const AnimatedWhiteKey = ({ pressed, ...props }) => {
   const meshRef = useRef<THREE.Mesh>();
-  const pressedDelta = useRef(0);
   useFrame(({}, delta) => {
-    // If pressed, we store the delta time for animation
-    if (pressed) {
-      pressedDelta.current += delta;
-    } else {
-      pressedDelta.current = 0;
-    }
-
     if (meshRef.current)
-      // We use a `lerp()` method to "tween" between 2 rotational values
-      meshRef.current.rotation.x = lerp(
-        0,
-        WHITE_KEY_ROTATION,
-        Math.min(pressedDelta.current / ANIMATION_TIME, 1)
+      // We use a `easing()` method to "tween" between 2 rotational values
+      easing.damp(
+        meshRef.current.rotation,
+        "x",
+        pressed ? WHITE_KEY_ROTATION : 0,
+        ANIMATION_TIME,
+        delta
       );
   });
 

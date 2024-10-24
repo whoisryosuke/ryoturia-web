@@ -27,6 +27,7 @@
     "babel-plugin-glsl": "^1.0.0",
     "glsl-random": "^0.0.5",
     "leva": "^0.9.27",
+    "maath": "^0.10.8",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
