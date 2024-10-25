@@ -1,4 +1,5 @@
 import DebugInput from "@/features/input/DebugInput";
+import MusicSwitcher from "@/features/Music/MusicSwitcher";
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -26,6 +27,7 @@ const DOM = () => {
   return (
     <>
       <DebugInput />
+      <MusicSwitcher />
     </>
   );
 };
