@@ -7,7 +7,7 @@ const DebugInput = (props: Props) => {
   const { input } = useInputStore();
 
   const inputMap = Object.entries(input);
-  const firstOctaveMap = inputMap.filter(([key, pressed]) => key.includes("1"));
+  const firstOctaveMap = inputMap.filter(([key, pressed]) => key.includes("4"));
   const inputElements = firstOctaveMap.map(([key, pressed]) => (
     <div
       key={key}

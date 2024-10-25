@@ -9,18 +9,18 @@ const Ryoturia = (props: Props) => {
   const { input } = useInputStore();
 
   const inputProps = {
-    c: input.C1,
-    d: input.D1,
-    e: input.E1,
-    f: input.F1,
-    g: input.G1,
-    a: input.A1,
-    b: input.B1,
-    csharp: input["C#1"],
-    dsharp: input["D#1"],
-    fsharp: input["F#1"],
-    gsharp: input["G#1"],
-    asharp: input["A#1"],
+    c: input.C4,
+    d: input.D4,
+    e: input.E4,
+    f: input.F4,
+    g: input.G4,
+    a: input.A4,
+    b: input.B4,
+    csharp: input["C#4"],
+    dsharp: input["D#4"],
+    fsharp: input["F#4"],
+    gsharp: input["G#4"],
+    asharp: input["A#4"],
   };
   return <RyoturiaModel {...inputProps} />;
 };

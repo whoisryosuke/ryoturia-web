@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Note, useInputStore } from "@/store/input";
 
 const KEY_MAP: Record<KeyboardEvent["key"], Note> = {
-  a: "C1",
-  s: "D1",
-  d: "E1",
-  f: "F1",
-  g: "G1",
-  h: "A1",
-  j: "B1",
-  w: "C#1",
-  e: "D#1",
-  r: "F#1",
-  t: "G#1",
-  y: "A#1",
+  a: "C4",
+  s: "D4",
+  d: "E4",
+  f: "F4",
+  g: "G4",
+  h: "A4",
+  j: "B4",
+  w: "C#4",
+  e: "D#4",
+  r: "F#4",
+  t: "G#4",
+  y: "A#4",
 };
 
 type Props = {};
