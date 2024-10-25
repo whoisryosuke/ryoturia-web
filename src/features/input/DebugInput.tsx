@@ -24,6 +24,8 @@ const DebugInput = (props: Props) => {
         bottom: 32,
         left: 32,
         zIndex: 999,
+        color: "#EFEFEF",
+        fontFamily: "sans-serif",
       }}
     >
       {inputElements}

@@ -22,6 +22,13 @@ const CanvasWrapper = ({ children }) => {
           near: 1,
           far: 40,
         }}
+        gl={{
+          powerPreference: "high-performance",
+          alpha: false,
+          antialias: true,
+          stencil: false,
+          depth: false,
+        }}
         shadows
         dpr={[1, 1.5]}
         style={{
