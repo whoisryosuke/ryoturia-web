@@ -1,20 +1,6 @@
-# r3f-next-starter
+# Ryoturia
 
-This is a batteries included template for using React Three Fiber (R3F) with NextJS 🔋. Based on [create-r3f-app](https://github.com/utsuboco/create-r3f-app).
-
-## Features
-
-- ♻ Easily mix DOM and 3D Canvas
-- 🎨 Fragment and Vertex Shaders (with syntax highlighting)
-- 🎬 [React Spring](https://github.com/pmndrs/react-spring) for animation
-- 🎛 [Leva](https://github.com/pmndrs/leva) panel for debugging
-- ♿ [R3F A11y](https://github.com/pmndrs/react-three-a11y)
-- 🏪 [Zustand](https://github.com/pmndrs/zustand) store
-- 📁 Relative paths (`@/components/`)
-- 📴 Offline mode
-- 🍱 Bundle Analyzer
-- 👕 ESLint and Prettier
-- ☑ Typescript
+A 3D MIDI Synthesizer Piano (for the web).
 
 ## Getting Started
 
@@ -23,9 +9,7 @@ This is a batteries included template for using React Three Fiber (R3F) with Nex
 1. Run the development server: `yarn dev`
 1. See the site here 👀: http://localhost:3000/
 
-### CodeSandbox
-
-You can also [preview and fork on CodeSandbox](https://githubbox.com/whoisryosuke/r3f-next-starter)
+> You can also [preview and fork on CodeSandbox](https://githubbox.com/whoisryosuke/ryoturia-web)
 
 ### Lint and Code Formatting
 
@@ -42,6 +26,8 @@ If you use VSCode, Prettier should run each time you save a compatible file.
 > Please note that when you update a major version, you should check the dependency's documentation to see if there are any necessary changes to make to app or dependency API.
 
 ## How to use
+
+This is based off my [r3f-next-starter](https://github.com/whoisryosuke/r3f-next-starter) project. Check out those docs for more details.
 
 ### DOM vs R3F
 
@@ -148,6 +134,6 @@ Check out [our guide on using R3F with Typescript.](./docs/typescript.md) And tr
 
 ## Credits
 
-- [NextJS ThreeJS/R3F Example](https://github.com/vercel/next.js/tree/canary/examples/with-three-js)
-- [create-r3f-app](https://github.com/utsuboco/create-r3f-app)
-- [Poimandres](https://github.com/pmndrs/)
+- [r3f-next-starter](https://github.com/whoisryosuke/r3f-next-starter)
+- [ToneJS](https://github.com/Tonejs/Tone.js)
+- [webmidi](https://github.com/djipco/webmidi)
