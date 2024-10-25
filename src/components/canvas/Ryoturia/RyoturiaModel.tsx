@@ -90,6 +90,8 @@ const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
         ANIMATION_TIME_ROTATION,
         delta
       );
+
+      // We "tween" between 2 colors, the original color (stored above) and a "pressed" color (blue)
       if (pressed) {
         colorDelta.current += delta;
       } else {
@@ -111,7 +113,9 @@ const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
 
-      // Doesn't work
+      // Doesn't work. It animates fine - but it doesn't retain the final state
+      // and it reverts immediately back to original color
+      // (ruining the "pressed" effect if held longer than the animation)
       // easing.dampC(
       //   meshRef.current.material.color,
       //   pressed ? [0, 0, 1] : keyColor,
