@@ -70,23 +70,55 @@ type GLTFResult = GLTF & {
   // animations: GLTFAction[];
 };
 
-const ANIMATION_TIME = 0.2; // seconds
+const ANIMATION_TIME_ROTATION = 0.1; // seconds
+const ANIMATION_SPEED_COLOR = 4; // seconds
 // Rotation in Blender is 3 euler which = 3 out of 360
 // ThreeJS uses PI-based units, so it'd be `x / Math.PI * 2`
 // The full proportional calculation: `(3 * (Math.PI * 2)) / 360 = x`
 const WHITE_KEY_ROTATION = 0.05235987755;
-const AnimatedWhiteKey = ({ pressed, ...props }) => {
+const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
+  const keyColor = black ? [0, 0, 0] : [0.8, 0.8, 0.8];
+  const colorDelta = useRef(0);
   const meshRef = useRef<THREE.Mesh>();
   useFrame(({}, delta) => {
-    if (meshRef.current)
+    if (meshRef.current) {
       // We use a `easing()` method to "tween" between 2 rotational values
       easing.damp(
         meshRef.current.rotation,
         "x",
         pressed ? WHITE_KEY_ROTATION : 0,
-        ANIMATION_TIME,
+        ANIMATION_TIME_ROTATION,
         delta
       );
+      if (pressed) {
+        colorDelta.current += delta;
+      } else {
+        colorDelta.current = Math.max(colorDelta.current - delta, 0);
+      }
+      meshRef.current.material.color.r = lerp(
+        keyColor[0],
+        0,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+      meshRef.current.material.color.g = lerp(
+        keyColor[1],
+        0,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+      meshRef.current.material.color.b = lerp(
+        keyColor[2],
+        1,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+
+      // Doesn't work
+      // easing.dampC(
+      //   meshRef.current.material.color,
+      //   pressed ? [0, 0, 1] : keyColor,
+      //   ANIMATION_TIME,
+      //   delta
+      // );
+    }
   });
 
   return <mesh ref={meshRef} {...props} />;
@@ -112,77 +144,82 @@ export function RyoturiaModel({
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyC.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[-0.488, 0.901, -5.421]}
         pressed={c}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes["BlackKeyC#"].geometry}
-        material={materials["PianoKey.Black"]}
+        material={materials["PianoKey.Black"].clone()}
         position={[-0.096, 1.014, -5.417]}
         pressed={csharp}
+        black
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes["BlackKeyG#"].geometry}
-        material={materials["PianoKey.Black"]}
+        material={materials["PianoKey.Black"].clone()}
         position={[4.304, 1.014, -5.417]}
         pressed={gsharp}
+        black
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyD.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[0.578, 0.901, -5.421]}
         pressed={d}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyE.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[1.644, 0.901, -5.421]}
         pressed={e}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyF.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[2.71, 0.901, -5.421]}
         pressed={f}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyG.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[3.775, 0.901, -5.421]}
         pressed={g}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyA.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[4.841, 0.901, -5.421]}
         pressed={a}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes.WhiteKeyB.geometry}
-        material={materials["PianoKey.White"]}
+        material={materials["PianoKey.White"].clone()}
         position={[5.907, 0.901, -5.421]}
         pressed={b}
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes["BlackKeyD#"].geometry}
-        material={materials["PianoKey.Black"]}
+        material={materials["PianoKey.Black"].clone()}
         position={[1.111, 1.014, -5.417]}
         pressed={dsharp}
+        black
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes["BlackKeyF#"].geometry}
-        material={materials["PianoKey.Black"]}
+        material={materials["PianoKey.Black"].clone()}
         position={[3.217, 1.014, -5.417]}
         pressed={fsharp}
+        black
       />
-      <AnimatedWhiteKey
+      <AnimatedPianoKey
         geometry={nodes["BlackKeyA#"].geometry}
-        material={materials["PianoKey.Black"]}
+        material={materials["PianoKey.Black"].clone()}
         position={[5.357, 1.014, -5.417]}
         pressed={asharp}
+        black
       />
       <mesh
         geometry={nodes.ScreenBorder.geometry}
