@@ -4,6 +4,8 @@ import { devtools } from "zustand/middleware";
 import { SynthTypes } from "../features/Music/Music";
 // import type {} from "@redux-devtools/extension"; // required for devtools typing
 
+type CameraAngleOptions = "front" | "three_quarter" | "top";
+
 interface AppState {
   // Theming
   // theme: ThemeOptions;
@@ -15,6 +17,10 @@ interface AppState {
   // UI
   showGamepad: boolean;
   setShowGamepad: (showGamepad: boolean) => void;
+
+  // 3D Scene
+  cameraAngle: CameraAngleOptions;
+  setCameraAngle: (cameraAngle: CameraAngleOptions) => void;
 
   // Sound state
   mute: boolean;
@@ -41,6 +47,10 @@ export const useAppStore = create<AppState>()(
     // UI
     showGamepad: true,
     setShowGamepad: (showGamepad) => set((state) => ({ showGamepad })),
+
+    // 3D Scene
+    cameraAngle: "three_quarter",
+    setCameraAngle: (cameraAngle) => set((state) => ({ cameraAngle })),
 
     // Sound
     mute: false,

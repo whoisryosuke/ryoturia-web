@@ -1,0 +1,10 @@
+.sidebar {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+}
+
+.content {
+  display: flex;
+  padding: 1em;
+}

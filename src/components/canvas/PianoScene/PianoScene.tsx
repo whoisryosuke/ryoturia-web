@@ -9,16 +9,19 @@ import {
   Noise,
   Vignette,
 } from "@react-three/postprocessing";
+import CameraAngles from "./CameraAngles";
 type Props = {};
 
 const PianoScene = (props: Props) => {
   return (
     <>
       <color attach="background" args={["#151515"]} />
-      <fog color="#161616" attach="fog" near={8} far={30} />
+      <fog color="#161616" attach="fog" near={12} far={30} />
       <Environment files="assets/neon_photostudio_1k.hdr" />
       <directionalLight position={[5, 5, 5]} castShadow />
+
       <Ryoturia />
+      <CameraAngles />
 
       <EffectComposer disableNormalPass multisampling={8}>
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
