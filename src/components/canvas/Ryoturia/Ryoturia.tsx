@@ -8,10 +8,6 @@ type Props = {};
 const Ryoturia = (props: Props) => {
   const { input } = useInputStore();
 
-  useFrame(({ camera }) => {
-    console.log(camera.position, camera.rotation);
-  });
-
   const inputProps = {
     c: input.C4,
     d: input.D4,

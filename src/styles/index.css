@@ -2,12 +2,16 @@
    ========================================================================== */
 
 :root {
+  /* Colors
+   ========================================================================== */
+  --colors-text: #e5e5e5;
+
   /* Text Styles
    ========================================================================== */
   --font-family: "Inter Tight", serif;
+  --letter-spacing: 0.08rem;
   --text-body-weight: 300;
-  --text-header-weight: 500;
-  --text-header-weight: 500;
+  --text-header-weight: 700;
 }
 
 /* App Styles
@@ -15,6 +19,7 @@
 body {
   font-family: var(--font-family);
   font-weight: var(--text-body-weight);
+  letter-spacing: var(--letter-spacing);
 }
 
 h1,

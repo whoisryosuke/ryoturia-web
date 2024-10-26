@@ -6,5 +6,8 @@
 
 .content {
   display: flex;
+  flex-direction: column;
   padding: 1em;
+
+  color: var(--colors-text, "#E5E5E5");
 }

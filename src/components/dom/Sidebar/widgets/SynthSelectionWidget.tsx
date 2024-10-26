@@ -4,23 +4,21 @@ import styles from "./SharedWidgetStyles.module.css";
 
 type Props = {};
 
-const CameraAngleWidget = (props: Props) => {
-  const { setCameraAngle } = useAppStore();
+const SynthSelectionWidget = (props: Props) => {
+  const { setSynthType } = useAppStore();
   const handleChange = (e) => {
     console.log("camera angle", e.currentTarget.value);
-    setCameraAngle(e.currentTarget.value);
+    setSynthType(e.currentTarget.value);
   };
-
   return (
     <div className={styles.option}>
-      <h3 className={styles.sidebar_header}>Camera Angle:</h3>
+      <h3 className={styles.sidebar_header}>Synth Type:</h3>
       <select className={styles.dropdown} onChange={handleChange}>
-        <option value="three_quarter">Three Quarter</option>
-        <option value="top">Top</option>
-        <option value="front">Front</option>
+        <option value="piano">Piano</option>
+        <option value="poly">Poly</option>
       </select>
     </div>
   );
 };
 
-export default CameraAngleWidget;
+export default SynthSelectionWidget;
