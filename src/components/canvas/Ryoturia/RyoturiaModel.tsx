@@ -82,12 +82,14 @@ const ANIMATION_SPEED_COLOR = 4; // seconds
 // The full proportional calculation: `(3 * (Math.PI * 2)) / 360 = x`
 const WHITE_KEY_ROTATION = 0.05235987755;
 const DRUM_PAD_PRESS_DISTANCE = 0.08;
+const PRESSED_EMISSIVE_COLOR = new THREE.Color("#4287f5");
 const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
   const keyColor = black ? [0, 0, 0] : [0.8, 0.8, 0.8];
   const colorDelta = useRef(0);
   const meshRef = useRef<THREE.Mesh>();
   useFrame(({}, delta) => {
     if (meshRef.current) {
+      // Animate the keys up or down when pressed
       // We use a `easing()` method to "tween" between 2 rotational values
       easing.damp(
         meshRef.current.rotation,
@@ -97,6 +99,7 @@ const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
         delta
       );
 
+      // Change color (we go from OG key color to blue - it helps glow pop more)
       // We "tween" between 2 colors, the original color (stored above) and a "pressed" color (blue)
       if (pressed) {
         colorDelta.current += delta;
@@ -116,6 +119,17 @@ const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
       meshRef.current.material.color.b = lerp(
         keyColor[2],
         1,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+
+      // Change Emission (glow)
+      (meshRef.current.material as THREE.MeshPhysicalMaterial).emissive =
+        PRESSED_EMISSIVE_COLOR;
+      (
+        meshRef.current.material as THREE.MeshPhysicalMaterial
+      ).emissiveIntensity = lerp(
+        0,
+        3,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
 
@@ -144,7 +158,8 @@ const AnimatedDrumPad = ({ pressed, ...props }) => {
         originalPositionY.current = meshRef.current.position.y;
       }
 
-      // We use a `easing()` method to "tween" between 2 rotational values
+      // Animate the keys up or down when pressed
+      // We use a `easing()` method to "tween" between 2 values
       easing.damp(
         meshRef.current.position,
         "y",
@@ -155,6 +170,7 @@ const AnimatedDrumPad = ({ pressed, ...props }) => {
         delta
       );
 
+      // Change color (we go from OG key color to blue - it helps glow pop more)
       // We "tween" between 2 colors, the original color (stored above) and a "pressed" color (blue)
       if (pressed) {
         colorDelta.current += delta;
@@ -171,9 +187,20 @@ const AnimatedDrumPad = ({ pressed, ...props }) => {
         0,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
+
+      // Change Emission (glow)
       meshRef.current.material.color.b = lerp(
         keyColor[2],
         1,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+      (meshRef.current.material as THREE.MeshPhysicalMaterial).emissive =
+        PRESSED_EMISSIVE_COLOR;
+      (
+        meshRef.current.material as THREE.MeshPhysicalMaterial
+      ).emissiveIntensity = lerp(
+        0,
+        3,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
     }
