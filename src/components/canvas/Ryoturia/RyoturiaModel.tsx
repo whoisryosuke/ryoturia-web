@@ -12,7 +12,7 @@ import { useFrame } from "@react-three/fiber";
 import { lerp } from "three/src/math/MathUtils";
 import { easing } from "maath";
 
-type Props = JSX.IntrinsicElements["group"] & {
+type ModelKeyMap = {
   c: boolean;
   d: boolean;
   e: boolean;
@@ -25,6 +25,11 @@ type Props = JSX.IntrinsicElements["group"] & {
   fsharp: boolean;
   gsharp: boolean;
   asharp: boolean;
+};
+
+type Props = JSX.IntrinsicElements["group"] & {
+  piano: ModelKeyMap;
+  drumpad: ModelKeyMap;
 };
 
 type GLTFResult = GLTF & {
@@ -76,6 +81,7 @@ const ANIMATION_SPEED_COLOR = 4; // seconds
 // ThreeJS uses PI-based units, so it'd be `x / Math.PI * 2`
 // The full proportional calculation: `(3 * (Math.PI * 2)) / 360 = x`
 const WHITE_KEY_ROTATION = 0.05235987755;
+const DRUM_PAD_PRESS_DISTANCE = 0.08;
 const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
   const keyColor = black ? [0, 0, 0] : [0.8, 0.8, 0.8];
   const colorDelta = useRef(0);
@@ -127,22 +133,56 @@ const AnimatedPianoKey = ({ pressed, black = false, ...props }) => {
 
   return <mesh ref={meshRef} {...props} />;
 };
+const AnimatedDrumPad = ({ pressed, ...props }) => {
+  const keyColor = [0.8, 0.8, 0.8];
+  const colorDelta = useRef(0);
+  const meshRef = useRef<THREE.Mesh>();
+  const originalPositionY = useRef<number>(null);
+  useFrame(({}, delta) => {
+    if (meshRef.current) {
+      if (originalPositionY.current == null) {
+        originalPositionY.current = meshRef.current.position.y;
+      }
 
-export function RyoturiaModel({
-  c = false,
-  d,
-  e,
-  f,
-  g,
-  a,
-  b,
-  csharp,
-  dsharp,
-  fsharp,
-  gsharp,
-  asharp,
-  ...props
-}: Props) {
+      // We use a `easing()` method to "tween" between 2 rotational values
+      easing.damp(
+        meshRef.current.position,
+        "y",
+        pressed
+          ? originalPositionY.current - DRUM_PAD_PRESS_DISTANCE
+          : originalPositionY.current,
+        ANIMATION_TIME_ROTATION,
+        delta
+      );
+
+      // We "tween" between 2 colors, the original color (stored above) and a "pressed" color (blue)
+      if (pressed) {
+        colorDelta.current += delta;
+      } else {
+        colorDelta.current = Math.max(colorDelta.current - delta, 0);
+      }
+      meshRef.current.material.color.r = lerp(
+        keyColor[0],
+        0,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+      meshRef.current.material.color.g = lerp(
+        keyColor[1],
+        0,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+      meshRef.current.material.color.b = lerp(
+        keyColor[2],
+        1,
+        Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
+      );
+    }
+  });
+
+  return <mesh ref={meshRef} {...props} />;
+};
+
+export function RyoturiaModel({ piano, drumpad, ...props }: Props) {
   const { nodes, materials } = useGLTF(
     "/models/MIDI to Keyframe - Piano Template - Web V4.glb"
   ) as GLTFResult;
@@ -152,77 +192,77 @@ export function RyoturiaModel({
         geometry={nodes.WhiteKeyC.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[-0.488, 0.901, -5.421]}
-        pressed={c}
+        pressed={piano.c}
       />
       <AnimatedPianoKey
         geometry={nodes["BlackKeyC#"].geometry}
         material={materials["PianoKey.Black"].clone()}
         position={[-0.096, 1.014, -5.417]}
-        pressed={csharp}
+        pressed={piano.csharp}
         black
       />
       <AnimatedPianoKey
         geometry={nodes["BlackKeyG#"].geometry}
         material={materials["PianoKey.Black"].clone()}
         position={[4.304, 1.014, -5.417]}
-        pressed={gsharp}
+        pressed={piano.gsharp}
         black
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyD.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[0.578, 0.901, -5.421]}
-        pressed={d}
+        pressed={piano.d}
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyE.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[1.644, 0.901, -5.421]}
-        pressed={e}
+        pressed={piano.e}
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyF.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[2.71, 0.901, -5.421]}
-        pressed={f}
+        pressed={piano.f}
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyG.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[3.775, 0.901, -5.421]}
-        pressed={g}
+        pressed={piano.g}
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyA.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[4.841, 0.901, -5.421]}
-        pressed={a}
+        pressed={piano.a}
       />
       <AnimatedPianoKey
         geometry={nodes.WhiteKeyB.geometry}
         material={materials["PianoKey.White"].clone()}
         position={[5.907, 0.901, -5.421]}
-        pressed={b}
+        pressed={piano.b}
       />
       <AnimatedPianoKey
         geometry={nodes["BlackKeyD#"].geometry}
         material={materials["PianoKey.Black"].clone()}
         position={[1.111, 1.014, -5.417]}
-        pressed={dsharp}
+        pressed={piano.dsharp}
         black
       />
       <AnimatedPianoKey
         geometry={nodes["BlackKeyF#"].geometry}
         material={materials["PianoKey.Black"].clone()}
         position={[3.217, 1.014, -5.417]}
-        pressed={fsharp}
+        pressed={piano.fsharp}
         black
       />
       <AnimatedPianoKey
         geometry={nodes["BlackKeyA#"].geometry}
         material={materials["PianoKey.Black"].clone()}
         position={[5.357, 1.014, -5.417]}
-        pressed={asharp}
+        pressed={piano.asharp}
         black
       />
       <mesh
@@ -241,74 +281,85 @@ export function RyoturiaModel({
         position={[2.815, 1.414, -8.023]}
         scale={0.991}
       />
-      <animated.mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsC.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.c}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes["ButtonsC#"].geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.csharp}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsD.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.d}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes["ButtonsD#"].geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.dsharp}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsE.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.e}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsF.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.f}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes["ButtonsF#"].geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.fsharp}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsG.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.g}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes["ButtonsG#"].geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.gsharp}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes.ButtonsA.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.a}
       />
-      <mesh
+      <AnimatedDrumPad
         geometry={nodes["ButtonsA#"].geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
+        pressed={drumpad.asharp}
       />
       <mesh
         geometry={nodes.ButtonsB.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
       />
       <mesh
         geometry={nodes.Buttons013.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
       />
       <mesh
         geometry={nodes.Buttons014.geometry}
-        material={materials["Button.DynamicText.001"]}
+        material={materials["Button.DynamicText.001"].clone()}
         position={[-0.518, 1.453, -6.839]}
       />
     </group>
