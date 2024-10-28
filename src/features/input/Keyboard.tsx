@@ -2,18 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Note, useInputStore } from "@/store/input";
 
 const KEY_MAP: Record<KeyboardEvent["key"], Note> = {
-  a: "C4",
-  s: "D4",
-  d: "E4",
-  f: "F4",
-  g: "G4",
-  h: "A4",
-  j: "B4",
-  w: "C#4",
-  e: "D#4",
-  r: "F#4",
-  t: "G#4",
-  y: "A#4",
+  // 4th octave - bottom row of keyboard
+  z: "C4",
+  x: "D4",
+  c: "E4",
+  v: "F4",
+  b: "G4",
+  n: "A4",
+  m: "B4",
+  s: "C#4",
+  d: "D#4",
+  g: "F#4",
+  h: "G#4",
+  j: "A#4",
+
+  // 5th octave - top row of keyboard
+  q: "C5",
+  w: "D5",
+  e: "E5",
+  r: "F5",
+  t: "G5",
+  y: "A5",
+  u: "B5",
+  2: "C#5",
+  3: "D#5",
+  5: "F#5",
+  6: "G#5",
+  7: "A#5",
 };
 
 type Props = {};
@@ -24,6 +39,7 @@ const Keyboard = (props: Props) => {
 
   // If pressed key is our target key then set to true
   function downHandler({ key }: KeyboardEvent): void {
+    console.log("key pressed", key);
     if (keys.includes(key)) {
       const noteKey = KEY_MAP[key];
       if (!input[noteKey]) setInput(noteKey, true);
