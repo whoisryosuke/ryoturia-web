@@ -8,10 +8,12 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { animated, useSpring } from "@react-spring/three";
-import { useFrame } from "@react-three/fiber";
+import { extend, useFrame } from "@react-three/fiber";
 import { lerp } from "three/src/math/MathUtils";
 import { easing } from "maath";
 import { UserInputMap, Note } from "@/store/input";
+import RyoturiaScreenMaterial from "./RyoturiaScreenMaterial";
+import RyoturiaScreen from "./RyoturiaScreen";
 
 type ModelKeyMap = {
   c: boolean;
@@ -191,7 +193,7 @@ const AnimatedPianoKey = ({
 
 export function RyoturiaModel({ piano, drumpad, setInput, ...props }: Props) {
   const { nodes, materials } = useGLTF(
-    "/models/MIDI to Keyframe - Piano Template - Web V4.glb"
+    "/models/MIDI to Keyframe - Piano Template - Web V5.glb"
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
@@ -306,9 +308,8 @@ export function RyoturiaModel({ piano, drumpad, setInput, ...props }: Props) {
         material={materials.PianoCase}
         position={[-0.682, 1.109, -2.962]}
       />
-      <mesh
+      <RyoturiaScreen
         geometry={nodes.ScreenInside.geometry}
-        material={materials["Piano.Screen.Inside"]}
         position={[2.815, 1.414, -8.023]}
         scale={0.991}
       />
@@ -432,4 +433,4 @@ export function RyoturiaModel({ piano, drumpad, setInput, ...props }: Props) {
 
 export default RyoturiaModel;
 
-useGLTF.preload("/models/MIDI to Keyframe - Piano Template - Web V4.glb");
+useGLTF.preload("/models/MIDI to Keyframe - Piano Template - Web V5.glb");
