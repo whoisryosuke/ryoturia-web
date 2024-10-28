@@ -39,7 +39,6 @@ const Keyboard = (props: Props) => {
 
   // If pressed key is our target key then set to true
   function downHandler({ key }: KeyboardEvent): void {
-    console.log("key pressed", key);
     if (keys.includes(key)) {
       const noteKey = KEY_MAP[key];
       if (!input[noteKey]) setInput(noteKey, true);
