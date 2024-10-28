@@ -115,6 +115,11 @@ interface InputState {
   input: UserInputMap;
   setInput: (key: UserInputKeys, input: boolean) => void;
   setMultiInput: (keys: Partial<UserInputMap>) => void;
+
+  currentDevice: InputDevices;
+  setCurrentDevice: (currentDevice: InputDevices) => void;
+  deviceName: string;
+  setDeviceName: (deviceName: string) => void;
 }
 
 export const useInputStore = create<InputState>()((set) => ({
@@ -123,4 +128,9 @@ export const useInputStore = create<InputState>()((set) => ({
     set((state) => ({ input: { ...state.input, [key]: input } })),
   setMultiInput: (keys) =>
     set((state) => ({ input: { ...state.input, ...keys } })),
+
+  currentDevice: "KEYBOARD",
+  setCurrentDevice: (currentDevice) => set(() => ({ currentDevice })),
+  deviceName: "Keyboard",
+  setDeviceName: (deviceName) => set(() => ({ deviceName })),
 }));
