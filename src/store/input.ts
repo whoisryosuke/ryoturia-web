@@ -116,8 +116,8 @@ interface InputState {
   setInput: (key: UserInputKeys, input: boolean) => void;
   setMultiInput: (keys: Partial<UserInputMap>) => void;
 
-  currentDevice: InputDevices;
-  setCurrentDevice: (currentDevice: InputDevices) => void;
+  currentDevice: string;
+  setCurrentDevice: (currentDevice: string) => void;
   deviceName: string;
   setDeviceName: (deviceName: string) => void;
 }

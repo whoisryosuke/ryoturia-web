@@ -6,7 +6,7 @@ import { useFrame } from "@react-three/fiber";
 type Props = {};
 
 const Ryoturia = (props: Props) => {
-  const { input } = useInputStore();
+  const { input, setInput } = useInputStore();
 
   const inputProps = {
     piano: {
@@ -38,7 +38,7 @@ const Ryoturia = (props: Props) => {
       asharp: input["A#5"],
     },
   };
-  return <RyoturiaModel {...inputProps} />;
+  return <RyoturiaModel {...inputProps} setInput={setInput} />;
 };
 
 export default Ryoturia;
