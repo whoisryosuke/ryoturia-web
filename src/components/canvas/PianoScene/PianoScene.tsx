@@ -23,8 +23,17 @@ const PianoScene = (props: Props) => {
       <Ryoturia />
       <CameraAngles />
 
-      <EffectComposer disableNormalPass multisampling={8}>
+      <EffectComposer multisampling={8}>
+        <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
+        {/* <DepthOfField
+          focusDistance={0}
+          focalLength={1}
+          bokehScale={2}
+          height={480}
+        /> */}
+        <Noise opacity={0.02} />
+        <Vignette eskil={false} offset={0.1} darkness={1.1} />
       </EffectComposer>
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
