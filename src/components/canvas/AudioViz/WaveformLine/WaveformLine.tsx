@@ -3,11 +3,12 @@ import React, { useMemo, useRef } from "react";
 import WaveformBox from "./WaveformBox";
 import { GroupProps, useFrame } from "@react-three/fiber";
 import mapRange from "@/helpers/mapRange";
-import { Mesh } from "three";
+import { Color, Mesh, MeshPhysicalMaterial } from "three";
 import { lerp } from "three/src/math/MathUtils";
 
 // const WAVE_BASE_COLOR = [0.8, 0.8, 0.8];
 const WAVE_BASE_COLOR = [0, 0, 0];
+const PRESSED_EMISSIVE_COLOR = new Color("#4287f5");
 
 type Props = GroupProps & {};
 
@@ -70,6 +71,12 @@ const WaveformLine = (props: Props) => {
         1,
         adjustedWaveHeight
       );
+
+      // Change Emission (glow)
+      (boxRefs.current[i].material as MeshPhysicalMaterial).emissive =
+        PRESSED_EMISSIVE_COLOR;
+      (boxRefs.current[i].material as MeshPhysicalMaterial).emissiveIntensity =
+        lerp(0, 3, adjustedWaveHeight);
     }
   });
 
