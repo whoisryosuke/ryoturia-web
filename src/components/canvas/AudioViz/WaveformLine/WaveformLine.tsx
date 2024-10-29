@@ -56,27 +56,14 @@ const WaveformLine = (props: Props) => {
       boxRefs.current[i].position.y = waveHeightAmplified;
 
       const adjustedWaveHeight = waveHeightNormalized * 10;
-      boxRefs.current[i].material.color.r = lerp(
-        WAVE_BASE_COLOR[0],
-        0,
-        adjustedWaveHeight
-      );
-      boxRefs.current[i].material.color.g = lerp(
-        WAVE_BASE_COLOR[1],
-        0,
-        adjustedWaveHeight
-      );
-      boxRefs.current[i].material.color.b = lerp(
-        WAVE_BASE_COLOR[2],
-        1,
-        adjustedWaveHeight
-      );
+      const material = boxRefs.current[i].material as MeshPhysicalMaterial;
+      material.color.r = lerp(WAVE_BASE_COLOR[0], 0, adjustedWaveHeight);
+      material.color.g = lerp(WAVE_BASE_COLOR[1], 0, adjustedWaveHeight);
+      material.color.b = lerp(WAVE_BASE_COLOR[2], 1, adjustedWaveHeight);
 
       // Change Emission (glow)
-      (boxRefs.current[i].material as MeshPhysicalMaterial).emissive =
-        PRESSED_EMISSIVE_COLOR;
-      (boxRefs.current[i].material as MeshPhysicalMaterial).emissiveIntensity =
-        lerp(0, 3, adjustedWaveHeight);
+      material.emissive = PRESSED_EMISSIVE_COLOR;
+      material.emissiveIntensity = lerp(0, 3, adjustedWaveHeight);
     }
   });
 
