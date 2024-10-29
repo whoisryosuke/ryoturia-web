@@ -10,6 +10,7 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 import CameraAngles from "./CameraAngles";
+import WaveformLine from "../AudioViz/WaveformLine/WaveformLine";
 type Props = {};
 
 const PianoScene = (props: Props) => {
@@ -22,6 +23,7 @@ const PianoScene = (props: Props) => {
 
       <Ryoturia />
       <CameraAngles />
+      <WaveformLine position={[-2.25, 2, -9]} />
 
       <EffectComposer multisampling={8}>
         <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
