@@ -10,6 +10,8 @@ const RyoturiaScreenMaterial = shaderMaterial(
   {
     time: 0,
     color: new THREE.Color(0.05, 0.2, 0.025),
+    bottomTextTexture: new THREE.Texture(),
+    marqueeTextTexture: new THREE.Texture(),
   },
   vertex,
   fragment
@@ -19,7 +21,5 @@ const RyoturiaScreenMaterial = shaderMaterial(
 // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
 // @ts-ignore
 RyoturiaScreenMaterial.key = THREE.MathUtils.generateUUID();
-
-extend({ RyoturiaScreenMaterial });
 
 export default RyoturiaScreenMaterial;
