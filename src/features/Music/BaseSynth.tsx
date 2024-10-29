@@ -13,10 +13,12 @@ type Props = {
 const BaseSynth = ({ type, config = {} }: Props) => {
   const notesPlaying = useRef<UserInputMap>({});
   const { input } = useInputStore();
-  const { mute, setMute, setWaveform, setFft } = useAppStore();
+  const { mute, setMute, setWaveform, setFft, volume, attack, decay } =
+    useAppStore();
   const loaded = useRef(false);
 
   // Create a synth and connect it to the main output (your speakers)
+  const envelope = useRef<Tone.AmplitudeEnvelope>(null);
   const synth = useRef<Tone.PolySynth | Tone.Sampler | null>(null);
   const waveform = useRef<Tone.Waveform | null>(null);
   const fft = useRef<Tone.FFT | null>(null);
@@ -61,6 +63,12 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       // Initialize plugins
       fft.current = new Tone.FFT();
       waveform.current = new Tone.Waveform();
+      envelope.current = new Tone.AmplitudeEnvelope({
+        attack: 0.11,
+        decay: 0.21,
+        sustain: 0.5,
+        release: 1.2,
+      }).toDestination();
 
       // Initialize synth with user's config
       // and "chain" in the plugins
@@ -71,16 +79,24 @@ const BaseSynth = ({ type, config = {} }: Props) => {
           console.log("loaded now!");
         },
       })
-        .chain(waveform.current, Tone.Destination)
-        .chain(fft.current, Tone.Destination)
+        .chain(waveform.current, Tone.getDestination())
+        .chain(fft.current, Tone.getDestination())
         .toDestination();
+
+      synth.current.connect(envelope.current);
 
       setWaveform(waveform);
       setFft(fft);
     }
 
     return () => {
-      if (synth.current) synth.current.releaseAll();
+      if (synth.current) {
+        synth.current.releaseAll();
+        synth.current.dispose();
+        waveform.current.dispose();
+        fft.current.dispose();
+        envelope.current.dispose();
+      }
     };
   }, []);
 
@@ -92,6 +108,29 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       // setMute(false);
     }
   }, [mute]);
+
+  // Sync volume with store
+  useEffect(() => {
+    if (synth.current && synth.current.volume.value != volume) {
+      synth.current.volume.set({
+        value: volume,
+      });
+    }
+  }, [volume]);
+
+  // Sync envelope with store
+  useEffect(() => {
+    if (envelope.current && envelope.current.attack != attack) {
+      envelope.current.set({
+        attack: attack,
+      });
+    }
+    if (envelope.current && envelope.current.decay != decay) {
+      envelope.current.set({
+        decay: decay,
+      });
+    }
+  }, [attack, decay]);
 
   return <></>;
 };

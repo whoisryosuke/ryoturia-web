@@ -25,6 +25,16 @@ interface AppState {
   // Sound state
   mute: boolean;
   setMute: (mute: boolean) => void;
+  volume: number;
+  setVolume: (volume: number) => void;
+  attack: number;
+  decay: number;
+  sustain: number;
+  release: number;
+  setAttack: (attack: number) => void;
+  setDecay: (decay: number) => void;
+  setSustain: (sustain: number) => void;
+  setRelease: (release: number) => void;
   synthType: SynthTypes;
   setSynthType: (synthType: SynthTypes) => void;
   waveform: React.RefObject<Tone.Waveform> | null;
@@ -55,6 +65,16 @@ export const useAppStore = create<AppState>()(
     // Sound
     mute: false,
     setMute: (mute) => set(() => ({ mute })),
+    volume: -12,
+    setVolume: (volume) => set(() => ({ volume })),
+    attack: 0.11,
+    decay: 0.21,
+    sustain: 0.5,
+    release: 1.2,
+    setAttack: (attack) => set(() => ({ attack })),
+    setDecay: (decay) => set(() => ({ decay })),
+    setSustain: (sustain) => set(() => ({ sustain })),
+    setRelease: (release) => set(() => ({ release })),
     synthType: "piano",
     setSynthType: (synthType) => set(() => ({ synthType })),
     waveform: null,

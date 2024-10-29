@@ -6,6 +6,7 @@ type Props = {};
 
 const MusicSwitcher = (props: Props) => {
   const { synthType } = useAppStore();
+
   return <Music type={synthType} />;
 };
 
