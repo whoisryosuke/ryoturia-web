@@ -75,7 +75,7 @@ export const useAppStore = create<AppState>()(
     setDecay: (decay) => set(() => ({ decay })),
     setSustain: (sustain) => set(() => ({ sustain })),
     setRelease: (release) => set(() => ({ release })),
-    synthType: "piano",
+    synthType: "mixed",
     setSynthType: (synthType) => set(() => ({ synthType })),
     waveform: null,
     setWaveform: (waveform) => set(() => ({ waveform })),
