@@ -13,12 +13,11 @@ type Props = {
 const BaseSynth = ({ type, config = {} }: Props) => {
   const notesPlaying = useRef<UserInputMap>({});
   const { input } = useInputStore();
-  const { mute, setMute, setWaveform, setFft, volume, attack, decay } =
+  const { mute, setMute, setWaveform, setFft, volume, attack, release } =
     useAppStore();
   const loaded = useRef(false);
 
   // Create a synth and connect it to the main output (your speakers)
-  const envelope = useRef<Tone.AmplitudeEnvelope>(null);
   const synth = useRef<Tone.PolySynth | Tone.Sampler | null>(null);
   const waveform = useRef<Tone.Waveform | null>(null);
   const fft = useRef<Tone.FFT | null>(null);
@@ -63,12 +62,6 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       // Initialize plugins
       fft.current = new Tone.FFT();
       waveform.current = new Tone.Waveform();
-      envelope.current = new Tone.AmplitudeEnvelope({
-        attack: 0.11,
-        decay: 0.21,
-        sustain: 0.5,
-        release: 1.2,
-      }).toDestination();
 
       // Initialize synth with user's config
       // and "chain" in the plugins
@@ -83,8 +76,6 @@ const BaseSynth = ({ type, config = {} }: Props) => {
         .chain(fft.current, Tone.getDestination())
         .toDestination();
 
-      synth.current.connect(envelope.current);
-
       setWaveform(waveform);
       setFft(fft);
     }
@@ -95,7 +86,6 @@ const BaseSynth = ({ type, config = {} }: Props) => {
         synth.current.dispose();
         waveform.current.dispose();
         fft.current.dispose();
-        envelope.current.dispose();
       }
     };
   }, []);
@@ -120,17 +110,20 @@ const BaseSynth = ({ type, config = {} }: Props) => {
 
   // Sync envelope with store
   useEffect(() => {
-    if (envelope.current && envelope.current.attack != attack) {
-      envelope.current.set({
+    const sampler = synth.current as Tone.Sampler;
+    if (!sampler) return;
+
+    if (sampler.attack != attack) {
+      sampler.set({
         attack: attack,
       });
     }
-    if (envelope.current && envelope.current.decay != decay) {
-      envelope.current.set({
-        decay: decay,
+    if (sampler.release != release) {
+      sampler.set({
+        attack: release,
       });
     }
-  }, [attack, decay]);
+  }, [attack, release]);
 
   return <></>;
 };

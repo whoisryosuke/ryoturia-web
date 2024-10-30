@@ -16,8 +16,8 @@ const VolumeWidget = (props: Props) => {
       <h3 className={styles.sidebar_header}>Volume:</h3>
       <input
         type="range"
-        min="-24"
-        max="30"
+        min="-48"
+        max="1"
         value={volume}
         onChange={handleChange}
       />

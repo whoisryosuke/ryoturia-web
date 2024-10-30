@@ -23,6 +23,10 @@ const EnvelopeWidget = (props: Props) => {
     console.log("changing decay", e.currentTarget.value);
     setDecay(e.currentTarget.value);
   };
+  const handleReleaseChange = (e) => {
+    console.log("changing release", e.currentTarget.value);
+    setRelease(e.currentTarget.value);
+  };
 
   return (
     <div className={styles.option}>
@@ -43,6 +47,15 @@ const EnvelopeWidget = (props: Props) => {
         step="0.1"
         value={decay}
         onChange={handleDecayChange}
+      />
+      <h3 className={styles.sidebar_header}>Release:</h3>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.1"
+        value={release}
+        onChange={handleReleaseChange}
       />
     </div>
   );
