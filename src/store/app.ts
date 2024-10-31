@@ -35,6 +35,8 @@ interface AppState {
   setDecay: (decay: number) => void;
   setSustain: (sustain: number) => void;
   setRelease: (release: number) => void;
+  pitchShift: number;
+  setPitchShift: (pitchShift: number) => void;
   synthType: SynthTypes;
   setSynthType: (synthType: SynthTypes) => void;
   waveform: React.RefObject<Tone.Waveform> | null;
@@ -75,6 +77,8 @@ export const useAppStore = create<AppState>()(
     setDecay: (decay) => set(() => ({ decay })),
     setSustain: (sustain) => set(() => ({ sustain })),
     setRelease: (release) => set(() => ({ release })),
+    pitchShift: 2,
+    setPitchShift: (pitchShift) => set(() => ({ pitchShift })),
     synthType: "mixed",
     setSynthType: (synthType) => set(() => ({ synthType })),
     waveform: null,

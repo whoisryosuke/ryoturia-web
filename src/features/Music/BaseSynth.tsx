@@ -13,12 +13,21 @@ type Props = {
 const BaseSynth = ({ type, config = {} }: Props) => {
   const notesPlaying = useRef<UserInputMap>({});
   const { input } = useInputStore();
-  const { mute, setMute, setWaveform, setFft, volume, attack, release } =
-    useAppStore();
+  const {
+    mute,
+    setMute,
+    setWaveform,
+    setFft,
+    volume,
+    attack,
+    release,
+    pitchShift,
+  } = useAppStore();
   const loaded = useRef(false);
 
   // Create a synth and connect it to the main output (your speakers)
   const synth = useRef<Tone.PolySynth | Tone.Sampler | null>(null);
+  const pitchShiftComponent = useRef<Tone.PitchShift | null>(null);
   const waveform = useRef<Tone.Waveform | null>(null);
   const fft = useRef<Tone.FFT | null>(null);
   const inputKeys = Object.keys(input) as UserInputKeys[];
@@ -62,6 +71,7 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       // Initialize plugins
       fft.current = new Tone.FFT();
       waveform.current = new Tone.Waveform();
+      pitchShiftComponent.current = new Tone.PitchShift(4);
 
       // Initialize synth with user's config
       // and "chain" in the plugins
@@ -74,7 +84,10 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       })
         .chain(waveform.current, Tone.getDestination())
         .chain(fft.current, Tone.getDestination())
+        .chain(pitchShiftComponent.current, Tone.getDestination())
         .toDestination();
+
+      // synth.current.connect(pitchShift.current);
 
       setWaveform(waveform);
       setFft(fft);
@@ -124,6 +137,15 @@ const BaseSynth = ({ type, config = {} }: Props) => {
       });
     }
   }, [attack, release]);
+
+  // Sync pitch shift with store
+  useEffect(() => {
+    if (pitchShiftComponent.current.pitch != pitchShift) {
+      pitchShiftComponent.current.set({
+        pitch: pitchShift,
+      });
+    }
+  }, [pitchShift]);
 
   return <></>;
 };

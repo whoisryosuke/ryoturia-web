@@ -5,6 +5,7 @@ import SynthSelectionWidget from "./widgets/SynthSelectionWidget";
 import MuteWidget from "./widgets/MuteWidget";
 import VolumeWidget from "./widgets/VolumeWidget";
 import EnvelopeWidget from "./widgets/EnvelopeWidget";
+import PitchShiftWidget from "./widgets/PitchShiftWidget";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const Sidebar = (props: Props) => {
         <MuteWidget />
         <VolumeWidget />
         <EnvelopeWidget />
+        <PitchShiftWidget />
       </div>
     </div>
   );
