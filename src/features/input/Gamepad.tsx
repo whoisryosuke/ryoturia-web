@@ -62,10 +62,8 @@ export function useGamepads() {
       const previousInput = input[inputKey];
       const currentInput = gamepad.buttons[parseInt(gamepadKey)].pressed;
       if (currentInput && !isPressed) isPressed = true;
-      if (previousInput !== currentInput) {
-        newInput[inputKey] = currentInput;
-        dirtyInput = true;
-      }
+      newInput[inputKey] = currentInput;
+      dirtyInput = true;
     });
 
     // Set device active
