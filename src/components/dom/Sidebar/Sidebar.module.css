@@ -6,6 +6,48 @@
   border: 10px solid var(--colors-gray);
   border-radius: 36px;
   min-width: 20%;
+
+  transform: translateY(0);
+  transition: transform 420ms ease-in;
+}
+
+.toggleButton {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease-in;
+}
+
+@media (max-width: 1000px) {
+  .sidebar {
+    transform: translateY(100%);
+  }
+  .toggleButton {
+    width: 42px;
+    height: 42px;
+    position: fixed;
+    bottom: 6rem;
+    right: 16px;
+
+    background-color: var(--colors-bg, #000);
+    border: 2px solid;
+    border-color: var(--colors-gray);
+    border-radius: 22px;
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.sidebarOpen {
+  transform: translateY(0);
+}
+
+.toggleButtonIcon {
+  transform: rotate(0);
+  transition: transform 420ms ease-in;
+}
+
+.toggleButtonIconOpen {
+  transform: rotate(180deg);
 }
 
 .content {
@@ -27,6 +69,7 @@
 
 .header h2 {
   font-size: 368px;
+  font-size: clamp(300px, 10vw, 368px);
   line-height: 80%;
   margin: 0;
   transform: rotate(90deg);

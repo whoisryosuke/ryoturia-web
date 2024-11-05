@@ -1,3 +1,4 @@
+import Footer from "@/components/dom/Footer";
 import Logo from "@/components/dom/Logo/Logo";
 import Sidebar from "@/components/dom/Sidebar/Sidebar";
 import DebugInput from "@/features/input/DebugInput";
@@ -31,6 +32,7 @@ const DOM = () => {
       <Logo />
       <Sidebar />
       <MusicSwitcher />
+      <Footer />
     </>
   );
 };

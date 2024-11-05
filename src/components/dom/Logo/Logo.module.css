@@ -1,5 +1,6 @@
 .logo {
   font-size: 200px;
+  font-size: clamp(150px, 10vw, 200px);
   line-height: 80%;
   color: var(--colors-gray);
   margin: 0;
@@ -9,6 +10,7 @@
 
 .subheader {
   font-size: 128px;
+  font-size: clamp(100px, 10vw, 128px);
   font-weight: var(--text-body-weight);
   line-height: 80%;
   color: var(--colors-gray);
@@ -24,4 +26,13 @@
 
   transform: rotate(-90deg);
   transform-origin: top left;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    bottom: auto;
+    top: -13rem;
+    transform: rotate(-180deg);
+    transform-origin: center;
+  }
 }
