@@ -14,6 +14,7 @@ const SynthSelectionWidget = (props: Props) => {
     <div className={styles.option}>
       <h3 className={styles.sidebar_header}>Synth Type:</h3>
       <select className={styles.dropdown} onChange={handleChange}>
+        <option value="mixed">Mixed (Piano + Drums)</option>
         <option value="piano">Piano</option>
         <option value="poly">Poly</option>
       </select>

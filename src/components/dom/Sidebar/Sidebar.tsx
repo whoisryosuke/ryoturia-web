@@ -12,6 +12,10 @@ type Props = {};
 const Sidebar = (props: Props) => {
   return (
     <div className={styles.sidebar}>
+      <div className={styles.header}>
+        <h2>Controls</h2>
+        <h2>Controls</h2>
+      </div>
       <div className={styles.content}>
         <CameraAngleWidget />
         <SynthSelectionWidget />

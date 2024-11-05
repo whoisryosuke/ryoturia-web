@@ -1,3 +1,4 @@
+import Logo from "@/components/dom/Logo/Logo";
 import Sidebar from "@/components/dom/Sidebar/Sidebar";
 import DebugInput from "@/features/input/DebugInput";
 import MusicSwitcher from "@/features/Music/MusicSwitcher";
@@ -27,8 +28,8 @@ const PianoScene = dynamic(
 const DOM = () => {
   return (
     <>
+      <Logo />
       <Sidebar />
-      <DebugInput />
       <MusicSwitcher />
     </>
   );

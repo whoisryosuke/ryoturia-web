@@ -6,26 +6,26 @@ import { Euler } from "three";
 const CAMERA_ANGLES = {
   top: {
     position: {
-      x: 3.75,
-      y: 19.35,
-      z: -3.64,
+      x: 3.9,
+      y: 18.35,
+      z: -2.5,
     },
     rotation: {
-      x: -1.54,
-      y: -3.2,
-      z: -0.01,
+      x: -1.5,
+      y: 0,
+      z: 0,
     },
   },
   three_quarter: {
     position: {
-      x: -5.3,
-      y: 14.8,
-      z: 13,
+      x: -1.2,
+      y: 10,
+      z: 6.6,
     },
     rotation: {
-      x: -0.78,
-      y: -0.33,
-      z: -0.32,
+      x: -0.9,
+      y: -0.4,
+      z: -0.48,
     },
   },
   front: {
@@ -49,11 +49,12 @@ const CameraAngles = (props: Props) => {
   const prevAngle = useRef("");
 
   useFrame(({ camera }) => {
+    // console.log("camera", camera.position, camera.rotation);
     if (prevAngle.current != cameraAngle) {
       const { x, y, z } = CAMERA_ANGLES[cameraAngle].position;
       const rotation = CAMERA_ANGLES[cameraAngle].rotation;
       camera.position.set(x, y, z);
-      camera.rotation.set(rotation.x, rotation.y, rotation.z);
+      camera.rotation.set(rotation.x, rotation.y, rotation.z, "XYZ");
       prevAngle.current = cameraAngle;
     }
   });

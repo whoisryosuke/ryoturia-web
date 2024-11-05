@@ -1,17 +1,22 @@
 .option {
+  padding: 1em;
+  border: 6px solid #222425;
+  border-radius: 32px;
   margin-bottom: 1rem;
 }
 
 .sidebar_header {
+  font-weight: var(--text-body-weight);
   margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .dropdown {
-  background: #333;
+  background: var(--colors-bg);
   color: #e5e5e5;
-  border: 3px solid #ccc;
-  border-radius: 32px;
+  border: 3px solid var(--colors-gray);
+  border-radius: 16px;
 
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
 }

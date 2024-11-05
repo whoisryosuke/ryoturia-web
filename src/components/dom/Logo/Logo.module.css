@@ -1,0 +1,27 @@
+.logo {
+  font-size: 200px;
+  line-height: 80%;
+  color: var(--colors-gray);
+  margin: 0;
+
+  text-transform: uppercase;
+}
+
+.subheader {
+  font-size: 128px;
+  font-weight: var(--text-body-weight);
+  line-height: 80%;
+  color: var(--colors-gray);
+  opacity: 50%;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.container {
+  position: fixed;
+  bottom: -270px;
+  left: 0;
+
+  transform: rotate(-90deg);
+  transform-origin: top left;
+}

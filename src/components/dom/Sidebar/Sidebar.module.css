@@ -1,7 +1,11 @@
 .sidebar {
   position: fixed;
   top: 1em;
-  right: 1em;
+  right: 20em;
+
+  border: 10px solid var(--colors-gray);
+  border-radius: 36px;
+  min-width: 20%;
 }
 
 .content {
@@ -10,4 +14,34 @@
   padding: 1em;
 
   color: var(--colors-text, "#E5E5E5");
+}
+
+.header {
+  position: absolute;
+  top: 1em;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.header h2 {
+  font-size: 368px;
+  line-height: 80%;
+  margin: 0;
+  transform: rotate(90deg);
+  transform-origin: bottom right;
+  color: #000;
+}
+
+.header h2:first-child {
+  -webkit-text-stroke-width: 9px;
+  -webkit-text-stroke-color: var(--colors-gray);
+}
+
+.header h2:nth-child(2n) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }

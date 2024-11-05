@@ -37,7 +37,7 @@ const CanvasWrapper = ({ children }) => {
         }}
       >
         <Stats />
-        <Controls />
+        {/* <Controls /> */}
         <Preload all />
         {children}
       </Canvas>

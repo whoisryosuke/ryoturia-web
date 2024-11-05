@@ -2,17 +2,19 @@ import * as Tone from "tone";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { SynthTypes } from "../features/Music/Music";
+import { ThemeOptions } from "@/theme";
+import { ThemeColors } from "@/theme/colors/base";
 // import type {} from "@redux-devtools/extension"; // required for devtools typing
 
 type CameraAngleOptions = "front" | "three_quarter" | "top";
 
 interface AppState {
   // Theming
-  // theme: ThemeOptions;
-  // setTheme: (theme: ThemeOptions) => void;
-  // toggleTheme: () => void;
-  // colorMode: ThemeColors;
-  // setColorMode: (colorMode: ThemeColors) => void;
+  theme: ThemeOptions;
+  setTheme: (theme: ThemeOptions) => void;
+  toggleTheme: () => void;
+  colorMode: ThemeColors;
+  setColorMode: (colorMode: ThemeColors) => void;
 
   // UI
   showGamepad: boolean;
@@ -47,14 +49,14 @@ interface AppState {
 
 export const useAppStore = create<AppState>()(
   devtools((set) => ({
-    // theme: "dark",
-    // setTheme: (theme) => set(() => ({ theme })),
-    // toggleTheme: () =>
-    //   set((state) => ({
-    //     theme: state.theme === "light" ? "dark" : "light",
-    //   })),
-    // colorMode: "cyan",
-    // setColorMode: (colorMode) => set(() => ({ colorMode })),
+    theme: "dark",
+    setTheme: (theme) => set(() => ({ theme })),
+    toggleTheme: () =>
+      set((state) => ({
+        theme: state.theme === "light" ? "dark" : "light",
+      })),
+    colorMode: "cyan",
+    setColorMode: (colorMode) => set(() => ({ colorMode })),
 
     // UI
     showGamepad: true,
