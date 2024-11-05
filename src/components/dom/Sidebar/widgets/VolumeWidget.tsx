@@ -20,7 +20,7 @@ const VolumeWidget = (props: Props) => {
       <Slider
         name="volume"
         minValue={-48}
-        maxValue={1}
+        maxValue={20}
         value={volume}
         onChange={handleChange}
       />

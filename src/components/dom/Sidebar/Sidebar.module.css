@@ -19,6 +19,8 @@
 
 @media (max-width: 1000px) {
   .sidebar {
+    min-width: 70%;
+    right: 10em;
     transform: translateY(100%);
   }
   .toggleButton {
