@@ -11,7 +11,7 @@ type Props = {
 };
 
 const BaseSynth = ({ type, config = {} }: Props) => {
-  const notesPlaying = useRef<UserInputMap>({});
+  const notesPlaying = useRef<Partial<UserInputMap>>({});
   const { input } = useInputStore();
   const {
     mute,
@@ -75,6 +75,7 @@ const BaseSynth = ({ type, config = {} }: Props) => {
 
       // Initialize synth with user's config
       // and "chain" in the plugins
+      // @ts-ignore
       synth.current = new Tone[type]({
         ...config,
         onload: () => {

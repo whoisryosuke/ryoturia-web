@@ -121,11 +121,12 @@ const SliderTrack = styled(AriaSliderTrack)`
 `;
 
 type Props = SliderProps & {
+  name?: string;
   label?: string;
   showOutput?: boolean;
 };
 
-const Slider = ({ label, showOutput, ...props }: Props) => {
+const Slider = ({ name, label, showOutput, ...props }: Props) => {
   return (
     <SliderBase {...props}>
       {label && <Label>{label}</Label>}
@@ -136,7 +137,7 @@ const Slider = ({ label, showOutput, ...props }: Props) => {
             <SliderProgress
               style={{ width: state.getThumbPercent(0) * 100 + "%" }}
             />
-            <SliderThumb />
+            <SliderThumb name={name} />
           </>
         )}
       </SliderTrack>

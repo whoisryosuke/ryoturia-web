@@ -11,7 +11,7 @@ import { animated, useSpring } from "@react-spring/three";
 import { extend, useFrame } from "@react-three/fiber";
 import { lerp } from "three/src/math/MathUtils";
 import { easing } from "maath";
-import { UserInputMap, Note } from "@/store/input";
+import { UserInputMap, Note, UserInputKeys } from "@/store/input";
 import RyoturiaScreenMaterial from "./RyoturiaScreenMaterial";
 import RyoturiaScreen from "./RyoturiaScreen";
 
@@ -33,7 +33,7 @@ type ModelKeyMap = {
 type Props = JSX.IntrinsicElements["group"] & {
   piano: ModelKeyMap;
   drumpad: ModelKeyMap;
-  setInput: (input: UserInputMap) => void;
+  setInput: (key: UserInputKeys, input: boolean) => void;
 };
 
 type GLTFResult = GLTF & {
@@ -135,28 +135,26 @@ const AnimatedPianoKey = ({
       } else {
         colorDelta.current = Math.max(colorDelta.current - delta, 0);
       }
-      meshRef.current.material.color.r = lerp(
+      const material = meshRef.current.material as THREE.MeshPhysicalMaterial;
+      material.color.r = lerp(
         keyColor[0],
         0,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
-      meshRef.current.material.color.g = lerp(
+      material.color.g = lerp(
         keyColor[1],
         0,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
-      meshRef.current.material.color.b = lerp(
+      material.color.b = lerp(
         keyColor[2],
         1,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)
       );
 
       // Change Emission (glow)
-      (meshRef.current.material as THREE.MeshPhysicalMaterial).emissive =
-        PRESSED_EMISSIVE_COLOR;
-      (
-        meshRef.current.material as THREE.MeshPhysicalMaterial
-      ).emissiveIntensity = lerp(
+      material.emissive = PRESSED_EMISSIVE_COLOR;
+      material.emissiveIntensity = lerp(
         0,
         3,
         Math.min(colorDelta.current * ANIMATION_SPEED_COLOR, 1)

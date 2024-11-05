@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useFocusStore } from "../../store/library";
-import { UserInputMap } from "../../constants/input";
-import { Note, useInputStore } from "@/store/input";
+import { Note, useInputStore, UserInputMap } from "@/store/input";
 
 // Gamepad uses array index based keys.
 export const DEFAULT_GAMEPAD_MAP: Record<number, Note> = {
