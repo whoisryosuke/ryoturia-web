@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/helpers/baseUrl";
 import BaseSynth from "./BaseSynth";
 
 type Props = {};
@@ -30,7 +31,7 @@ const MixedSampler = (props: Props) => {
           A5: "A5.mp3",
           B5: "B5.mp3",
         },
-        baseUrl: "http://localhost:3000/samples/mixed/",
+        baseUrl: `${BASE_URL}samples/mixed/`,
       }}
     />
   );

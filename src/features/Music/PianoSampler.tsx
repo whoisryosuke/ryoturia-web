@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/helpers/baseUrl";
 import BaseSynth from "./BaseSynth";
 
 type Props = {};
@@ -17,7 +18,7 @@ const PianoSampler = (props: Props) => {
           C6: "C6.mp3",
           C7: "C7.mp3",
         },
-        baseUrl: "http://localhost:3000/samples/piano-acoustic/",
+        baseUrl: `${BASE_URL}samples/piano-acoustic/`,
       }}
     />
   );
