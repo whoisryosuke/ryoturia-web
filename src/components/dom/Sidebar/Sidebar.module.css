@@ -22,6 +22,8 @@
     min-width: 70%;
     right: 10em;
     transform: translateY(100%);
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 0.75rem;
   }
   .toggleButton {
     width: 42px;
@@ -29,6 +31,9 @@
     position: fixed;
     bottom: 6rem;
     right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background-color: var(--colors-bg, #000);
     border: 2px solid;

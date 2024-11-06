@@ -15,6 +15,10 @@ const StyledFooter = styled.div`
   padding: 1rem 2rem;
   border-radius: 16px;
 
+  @media (max-width: 1000px) {
+    font-size: 0.75rem;
+  }
+
   & a {
     color: ${({ theme }) => theme.colors.primary.default};
     text-decoration: none;
