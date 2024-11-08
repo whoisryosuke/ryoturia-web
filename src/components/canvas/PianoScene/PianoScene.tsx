@@ -11,6 +11,8 @@ import {
 } from "@react-three/postprocessing";
 import CameraAngles from "./CameraAngles";
 import WaveformLine from "../AudioViz/WaveformLine/WaveformLine";
+import ProductPiano from "../ProductPiano/ProductPiano";
+import WaveformScreen from "../AudioViz/WaveformScreen/WaveformScreen";
 type Props = {};
 
 const PianoScene = (props: Props) => {
@@ -21,9 +23,13 @@ const PianoScene = (props: Props) => {
       <Environment files="assets/neon_photostudio_1k.hdr" />
       <directionalLight position={[5, 5, 5]} castShadow />
 
-      <Ryoturia />
+      <ProductPiano />
       <CameraAngles />
-      <WaveformLine position={[-2.25, 2, -9]} />
+      {/* <WaveformLine position={[-2.25, 2, -9]} /> */}
+      <WaveformScreen
+        position={[-5.5, 0.91, -2.962]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      />
 
       <EffectComposer multisampling={8}>
         <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
