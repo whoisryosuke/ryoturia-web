@@ -1,6 +1,7 @@
 import { NoteMessageEvent, WebMidi } from "webmidi";
 import React, { useEffect, useState } from "react";
 import { Note, useInputStore } from "@/store/input";
+import { isApplePlatform } from "@/helpers/platform";
 
 type Props = {};
 
@@ -32,6 +33,7 @@ const MidiKeyboard = (props: Props) => {
   // console.log("currentNotes", currentNotes);
   // console.log("input", input);
   useEffect(() => {
+    if (isApplePlatform()) return;
     WebMidi.enable()
       .then(onEnabled)
       .catch((err) => alert(err));
