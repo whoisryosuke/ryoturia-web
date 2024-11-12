@@ -6,8 +6,8 @@ type Props = {};
 const Logo = (props: Props) => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.logo}>Ryoturia</h1>
-      <h2 className={styles.subheader}>Keymaster 12 essentials</h2>
+      <h1 className={styles.logo}>RyoMIDI</h1>
+      <h2 className={styles.subheader}>Digipro 12 Mini</h2>
     </div>
   );
 };
