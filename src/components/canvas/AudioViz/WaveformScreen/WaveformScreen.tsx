@@ -70,9 +70,11 @@ const WaveformScreen = (props: Props) => {
       // Animate the color (black to blue) based on waveform height
       const adjustedWaveHeight = waveHeightNormalized * 10;
       const material = boxRefs.current[i].material as MeshPhysicalMaterial;
+      material.transparent = true;
       material.color.r = lerp(WAVE_BASE_COLOR[0], 0, adjustedWaveHeight);
       material.color.g = lerp(WAVE_BASE_COLOR[1], 0, adjustedWaveHeight);
       material.color.b = lerp(WAVE_BASE_COLOR[2], 1, adjustedWaveHeight);
+      material.opacity = lerp(0, 1, adjustedWaveHeight);
 
       // Change Emission (glow) based on waveform height
       material.emissive = PRESSED_EMISSIVE_COLOR;
