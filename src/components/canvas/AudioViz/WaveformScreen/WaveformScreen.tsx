@@ -9,7 +9,7 @@ import { lerp } from "three/src/math/MathUtils";
 // const WAVE_BASE_COLOR = [0.8, 0.8, 0.8]; // White
 const WAVE_BASE_COLOR = [0, 0, 0]; // Black
 const PRESSED_EMISSIVE_COLOR = new Color("#4287f5"); // Brand Blue
-const BAR_LIMIT = 12;
+const BAR_LIMIT = 24;
 
 type Props = GroupProps & {};
 
@@ -17,8 +17,8 @@ const WaveformScreen = (props: Props) => {
   const boxRefs = useRef<Mesh[]>([]);
 
   // We grab the waveform data
-  const { fft } = useAppStore();
-  const levels = fft.current.getValue();
+  const { fft, waveform } = useAppStore();
+  const levels = waveform.current.getValue();
 
   // Generate boxes to represent notches on the waveform
   // We only need 1/BAR_LIMIT of the boxes (the levels gives us 1024 data points - so we limit it a bit)

@@ -1,5 +1,6 @@
 import Footer from "@/components/dom/Footer";
 import Logo from "@/components/dom/Logo/Logo";
+import MusicPlayer from "@/components/dom/MusicPlayer/MusicPlayer";
 import Sidebar from "@/components/dom/Sidebar/Sidebar";
 import DebugInput from "@/features/input/DebugInput";
 import MusicSwitcher from "@/features/Music/MusicSwitcher";
@@ -29,9 +30,10 @@ const PianoScene = dynamic(
 const DOM = () => {
   return (
     <>
-      <Logo />
-      <Sidebar />
+      {/* <Logo /> */}
+      {/* <Sidebar /> */}
       <MusicSwitcher />
+      <MusicPlayer />
       <Footer />
     </>
   );
@@ -46,11 +48,7 @@ const R3F = () => {
     router.push("/two");
   };
 
-  return (
-    <>
-      <PianoScene />
-    </>
-  );
+  return <>{/* <PianoScene /> */}</>;
 };
 
 export default function Page() {
